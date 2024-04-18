@@ -1,8 +1,6 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        left, right = 0, 1
-
-        cheaper = prices[left]
+        cheaper = prices[0]
         max_profit = 0
 
         for i in range(1, len(prices)):
