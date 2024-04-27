@@ -5,26 +5,20 @@ class Solution:
         if ns < nt:
             return ""
         
-        tCount = {}
-        sCount = {}
+        tCount = collections.Counter(t)
+        sCount = collections.Counter(s[:nt])
+        matches = 0
 
-        for i in range(nt):
-            tCount[t[i]] = 1 + tCount.get(t[i], 0)
-            sCount[s[i]] = 1 + sCount.get(s[i], 0)
-            
-        def checkInclusion():
-            for key, value in tCount.items():
-                if key not in sCount or sCount[key] < value:
-                    return False
-
-            return True
+        for key, value in tCount.items():
+            if key in sCount:
+                matches += min(sCount[key], value)
 
         ans = ""
         min_length = float("inf")
         l, r = 0, nt
         
         while r <= ns:
-            if checkInclusion():
+            if matches >= nt:
                 current_length = r - l
                 if current_length < min_length:
                     min_length = current_length
@@ -32,6 +26,8 @@ class Solution:
                 
                 l_key = s[l]    
                 sCount[l_key] -= 1
+                if l_key in tCount and tCount[l_key] > sCount[l_key]:
+                    matches -= 1
                 if sCount[l_key] == 0:
                     del(sCount[l_key])
                 l += 1
@@ -39,6 +35,8 @@ class Solution:
                 if r < ns:
                     r_key = s[r]
                     sCount[r_key] = 1 + sCount.get(r_key, 0)
+                    if r_key in tCount and sCount[r_key] <= tCount[r_key]:
+                        matches += 1
                 r += 1
                         
                     
