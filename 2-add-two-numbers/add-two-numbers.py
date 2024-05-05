@@ -9,34 +9,17 @@ class Solution:
         dummy = ListNode()
         l3 = dummy
         
-        r = 0
-        while l1 and l2:
-            sumd = r + l1.val + l2.val
-            r = sumd // 10
-            q = sumd % 10
-            l3.next = ListNode(q)
-            l3 = l3.next
-            l1 = l1.next
-            l2 = l2.next
+        c = 0
+        while l1 or l2 or c:
+            v1 = l1.val if l1 else 0
+            v2 = l2.val if l2 else 0
 
-        while l1:
-            sumd = r + l1.val
-            r = sumd // 10
-            q = sumd % 10
-            l3.next = ListNode(q)
-            l3 = l3.next
-            l1 = l1.next
+            c, value = divmod(c + v1 + v2, 10)
+            l3.next = ListNode(value)
 
-        while l2:
-            sumd = r + l2.val
-            r = sumd // 10
-            q = sumd % 10
-            l3.next = ListNode(q)
             l3 = l3.next
-            l2 = l2.next
-
-        if r > 0:
-            l3.next = ListNode(r)
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
 
         return dummy.next
              
