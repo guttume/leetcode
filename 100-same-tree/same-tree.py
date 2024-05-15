@@ -6,32 +6,10 @@
 #         self.right = right
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        pa = []
-        qa = []
+        if not p and not q:
+            return True
+        
+        if p and q and p.val == q.val:
+            return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
 
-        def iot(root, arr):
-            if not root:
-                arr.append(None)
-                return None
-
-            arr.append(root.val)
-            iot(root.left, arr)
-            iot(root.right, arr)
-
-        iot(p, pa)
-        iot(q, qa)
-
-        print(pa)
-        print(qa)
-
-        pn = len(pa)
-        qn = len(qa)
-
-        if pn != qn:
-            return False
-
-        for i in range(pn):
-            if pa[i] != qa[i]:
-                return False
-
-        return True
+        return False
