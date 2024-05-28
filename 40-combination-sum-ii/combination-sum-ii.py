@@ -11,7 +11,7 @@ class Solution:
                 ans.append(cur[:])
                 continue
 
-            if total > target or start >= len(candidates):
+            if total > target:
                 continue
 
             for i in range(start, len(candidates)):
