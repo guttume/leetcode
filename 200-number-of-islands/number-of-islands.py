@@ -9,10 +9,9 @@ class Solution:
                 return
 
             grid[r][c] = "0"
-            dfs(r + 1, c)
-            dfs(r, c + 1)
-            dfs(r - 1, c)
-            dfs(r, c - 1)
+            directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+            for dr, dc in directions:
+                dfs(r + dr, c + dc)
 
         for r in range(ROWS):
             for c in range(COLS):
