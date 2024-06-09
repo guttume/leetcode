@@ -5,9 +5,12 @@ class Solution:
         q = collections.deque()
 
         seconds = 0
+        fresh = 0
 
         for r in range(ROWS):
             for c in range(COLS):
+                if grid[r][c]== 1:
+                    fresh += 1
                 if grid[r][c]== 2:
                     q.append((r, c, 0))
 
@@ -25,12 +28,8 @@ class Solution:
                     if 0 <= next_row < ROWS and 0 <= next_col < COLS and grid[next_row][next_col] == 1:
                         grid[next_row][next_col] = 2
                         q.append((next_row, next_col, time + 1))
+                        fresh -= 1
 
-        for r in range(ROWS):
-            for c in range(COLS):
-                if grid[r][c] == 1:
-                    return -1
-
-        return seconds
+        return -1 if fresh > 0 else seconds
 
         
