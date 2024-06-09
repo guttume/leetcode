@@ -15,7 +15,7 @@ class Solution:
             for i in range(len(q)):
                 r, c, time = q.popleft()
 
-                seconds = max(seconds, time)
+                seconds = time
 
                 directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]
 
