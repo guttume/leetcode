@@ -23,12 +23,8 @@ class Solution:
                     continue
                 
                 if grid[r][c] == "1":
-                    visited.add((r, c))
                     islands += 1
-                    dfs(r + 1, c, ROWS, COLS)
-                    dfs(r, c + 1, ROWS, COLS)
-                    dfs(r - 1, c, ROWS, COLS)
-                    dfs(r, c - 1, ROWS, COLS)
+                    dfs(r, c, ROWS, COLS)
 
         return islands
 
