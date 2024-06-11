@@ -22,10 +22,4 @@ class Solution:
             dfs(r, 0, pac, heights[r][0])
             dfs(r, COLS - 1, atl, heights[r][COLS - 1])
 
-        ans = []
-        for r in range(ROWS):
-            for c in range(COLS):
-                if (r, c) in pac and (r, c) in atl:
-                    ans.append([r, c])
-
-        return ans
+        return pac.intersection(atl)
