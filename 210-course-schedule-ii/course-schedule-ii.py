@@ -1,7 +1,7 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         d_map = [[] for i in range(numCourses)]
-        visited = set()
+        visited, added = set(), set()
         ans = []
 
         for crs, dep in prerequisites:
@@ -11,6 +11,9 @@ class Solution:
             if crs in visited:
                 return False
 
+            if crs in added:
+                return True
+
             visited.add(crs)
             for dep in d_map[crs]:
                 if not dfs(dep):
@@ -18,8 +21,8 @@ class Solution:
 
             visited.remove(crs)
             d_map[crs] = []
-            if crs not in ans:
-                ans.append(crs)
+            added.add(crs)
+            ans.append(crs)
             return True
 
         for i in range(numCourses):
