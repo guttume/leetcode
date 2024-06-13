@@ -26,6 +26,6 @@ class Solution:
             if not dfs(i):
                 return []
 
-        return list(ans)
+        return ans
 
             
