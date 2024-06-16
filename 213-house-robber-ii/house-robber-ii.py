@@ -1,15 +1,28 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        def helper(nums):
-            rob1 = 0
-            rob2 = 0
+        n = len(nums)
 
-            for num in nums:
-                rob1, rob2 = rob2, max(rob2, num + rob1)
-
-            return max(rob1, rob2)
-
-        if len(nums) == 1:
+        if n == 1:
             return nums[0]
 
-        return max(helper(nums[:-1]), helper(nums[1:]))
+        def helper(i, j, memo):
+            if (i, j) in memo:
+                return memo[(i, j)]
+
+            if i < j:
+                return 0
+
+            if i == j:
+                return nums[i]
+                
+            value = nums[i]
+            nextNext = i - 2
+            nextn = i - 1
+            take = value + helper(nextNext, j, memo)
+            skip = helper(nextn, j, memo)
+
+            memo[(i, j)] = max(take, skip)
+            return memo[(i, j)]
+
+        memo = {}
+        return max(helper(n-2, 0, memo), helper(n-1, 1, memo))
