@@ -16,14 +16,8 @@ class Solution:
 
             if i == j:
                 return nums[i]
-                
-            value = nums[i]
-            nextNext = i - 2
-            nextn = i - 1
-            take = value + helper(nextNext, j)
-            skip = helper(nextn, j)
-
-            memo[(i, j)] = max(take, skip)
+            
+            memo[(i, j)] = max(nums[i] + helper(i - 2, j), helper(i - 1, j))
             return memo[(i, j)]
 
         return max(helper(n-2, 0), helper(n-1, 1))
