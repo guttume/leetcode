@@ -5,7 +5,9 @@ class Solution:
         if n == 1:
             return nums[0]
 
-        def helper(i, j, memo):
+        memo = {}
+
+        def helper(i, j):
             if (i, j) in memo:
                 return memo[(i, j)]
 
@@ -18,11 +20,10 @@ class Solution:
             value = nums[i]
             nextNext = i - 2
             nextn = i - 1
-            take = value + helper(nextNext, j, memo)
-            skip = helper(nextn, j, memo)
+            take = value + helper(nextNext, j)
+            skip = helper(nextn, j)
 
             memo[(i, j)] = max(take, skip)
             return memo[(i, j)]
 
-        memo = {}
-        return max(helper(n-2, 0, memo), helper(n-1, 1, memo))
+        return max(helper(n-2, 0), helper(n-1, 1))
