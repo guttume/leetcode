@@ -5,19 +5,22 @@ class Solution:
         if n == 1:
             return nums[0]
 
-        memo = {}
+        def helper(nums):
+            m = len(nums)
 
-        def helper(i, j):
-            if (i, j) in memo:
-                return memo[(i, j)]
+            if m == 1:
+                return nums[0]
 
-            if i < j:
-                return 0
+            dp = [0] * 2
 
-            if i == j:
-                return nums[i]
-            
-            memo[(i, j)] = max(nums[i] + helper(i - 2, j), helper(i - 1, j))
-            return memo[(i, j)]
+            dp[0] = nums[0]
+            dp[1] = max(nums[0], nums[1])
 
-        return max(helper(n-2, 0), helper(n-1, 1))
+            for i in range(2, m):
+                temp = max(nums[i] + dp[0], dp[1])
+                dp[0] = dp[1]
+                dp[1] = temp
+
+            return dp[1]
+
+        return max(helper(nums[:-1]), helper(nums[1:]))
