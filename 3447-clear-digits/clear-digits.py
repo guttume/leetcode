@@ -1,20 +1,14 @@
 class Solution:
     def clearDigits(self, s: str) -> str:
-
-        helper = [1] * len(s)
-
-        for i in range(len(s)):
-            if s[i] >= '0' and s[i] <= '9':
-                helper[i] = 0
-                
-                for j in range(i - 1, -1 , -1):
-                    if s[j] >= 'a' and s[j] <= 'z' and helper[j] == 1:
-                        helper[j] = 0
-                        break
-        
         ans = ""
-        for i in range(len(s)):
-            if helper[i] == 1:
-                ans += s[i]
+        count = 0
+        
+        for i in range(len(s) - 1, -1, -1):
+            if s[i] >= '0' and s[i] <= '9':
+                count += 1
+            elif count == 0:
+                ans = s[i] + ans
+            else:
+                count -= 1
 
         return ans
