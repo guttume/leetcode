@@ -1,34 +1,32 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        n = len(s)
-        if n == 0:
-            return ""
         
-        # Initialize a table to store whether substring[i:j+1] is a palindrome
-        dp = [[False] * n for _ in range(n)]
-        
-        # Initialize variables to keep track of the longest palindrome found
-        start = 0
-        max_length = 1
-        
-        # Single characters are palindromes
-        for i in range(n):
-            dp[i][i] = True
-        
-        # Check for palindromes of length 2
-        for i in range(n - 1):
-            if s[i] == s[i + 1]:
-                dp[i][i + 1] = True
-                start = i
-                max_length = 2
-        
-        # Check for palindromes of length greater than 2
-        for length in range(3, n + 1):
-            for i in range(n - length + 1):
-                j = i + length - 1
-                if s[i] == s[j] and dp[i + 1][j - 1]:
-                    dp[i][j] = True
-                    start = i
-                    max_length = length
-        
-        return s[start:start + max_length]
+        longest = s[0]
+
+        for i in range(len(s)):
+            l= r = i
+            current = ""
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                current = s[l] + current
+                if l != r:
+                    current += s[r]
+                l -= 1
+                r += 1
+
+            if len(longest) < len(current):
+                longest = current
+
+            current = ""
+            l = i
+            r = i + 1
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                current = s[l] + current
+                current += s[r]
+                l -= 1
+                r += 1
+
+            if len(longest) < len(current):
+                longest = current
+
+
+        return longest
