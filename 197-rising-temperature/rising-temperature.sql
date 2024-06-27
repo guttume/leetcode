@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+select today.id from Weather previous join Weather today on DATE_SUB(today.recordDate, INTERVAL 1 DAY) = previous.recordDate where today.temperature > previous.temperature
