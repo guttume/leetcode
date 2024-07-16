@@ -3,7 +3,7 @@ class Solution:
         x = 0
 
         for operation in operations:
-            if operation == "++X" or operation == "X++":
+            if operation[1] == "+":
                 x += 1
             else:
                 x -= 1
