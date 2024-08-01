@@ -10,15 +10,12 @@ class Solution:
 
             return sumd
 
-        sums = set()
+        slow, fast = n, sum_of_digit(n)
 
-        s = sum_of_digit(n)
-        while s != 1:
-            if s in sums:
-                return False
+        while slow != fast:
+            fast = sum_of_digit(fast)
+            fast = sum_of_digit(fast)
+            slow = sum_of_digit(slow)
 
-            sums.add(s)
-            s = sum_of_digit(s)
-
-        return True
+        return True if fast == 1 else False
         
