@@ -6,24 +6,15 @@
 class Solution:
     def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
         
-        s = set()
+        s_nums = set(nums)
 
-        for n in nums:
-            s.add(n)
+        dummy = ListNode(next=head)
+        curr = dummy
 
-        dummy = ListNode()
-        dummy.next = head
-        curr = head
-        prev = dummy
-
-        while curr:
-            temp = curr.next
-            if curr.val in s:
-                curr.next = None
-                prev.next = temp
+        while curr.next:
+            if curr.next.val in s_nums:
+                curr.next = curr.next.next
             else:
-                prev = curr
-            curr = temp
+                curr = curr.next
 
         return dummy.next
-            
