@@ -6,17 +6,13 @@ impl Solution {
             return false;
         }
 
-        let mut s_count = HashMap::new();
-        let mut t_count = HashMap::new();
+        let mut count = [0; 26];
 
-        for c in s.chars() {
-            *s_count.entry(c).or_insert(0) += 1;
+        for (sc, tc) in s.chars().zip(t.chars()) {
+            count[(sc as usize) - ('a' as usize)] += 1;
+            count[(tc as usize) - ('a' as usize)] -= 1;
         }
 
-        for c in t.chars() {
-            *t_count.entry(c).or_insert(0) += 1;
-        }
-
-        s_count == t_count
+        count.iter().all(|&x| x == 0)
     }
 }
