@@ -3,8 +3,10 @@ class Solution:
         tracker = defaultdict(list)
 
         for word in strs:
-            key = tuple(sorted(word))
-            tracker[key].append(word)
+            count = [0] * 26
+            for letter in word:
+                count[ord(letter) - ord('a')] += 1 
+            tracker[tuple(count)].append(word)
 
         ans = []
 
