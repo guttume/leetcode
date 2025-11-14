@@ -10,7 +10,4 @@ class Solution:
 
         ans = []
 
-        for values in tracker.values():
-            ans.append(values)
-
-        return ans
+        return list(tracker.values())
